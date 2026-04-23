@@ -1,139 +1,141 @@
 ```mermaid
 classDiagram
     class Resources {
-        -int wood
-        -int herb
-        -int metal
-        +Resources(w, h, m)
-        +addAmount(resource, amount) void
-        +getAmount(resource) int
-        +getWood() int
-        +getHerb() int
-        +getMetal() int
+        - wood: int
+        - herb: int
+        - metal: int
+        + Resources(w: int, h: int, m: int)
+        + addAmount(resource: string, amount: int) void
+        + getAmount(resource: string) int
+        + getWood() int
+        + getHerb() int
+        + getMetal() int
     }
 
     class Zone {
-        -string name
-        -Resources stock
-        -vector~string~ creaturesIds
-        +Zone(n, w, h, m)
-        +getName() string
-        +getStock() Resources&
-        +getCreaturesIDs() vector~string~&
-        +addCreature(name) void
-        +removeCreature(name) void
+        - name: string
+        - stock: Resources
+        - creaturesIds: vector~string~
+        + Zone(n: string, w: int, h: int, m: int)
+        + getName() string
+        + getStock() Resources&
+        + getCreaturesIDs() vector~string~&
+        + addCreature(name: string) void
+        + removeCreature(name: string) void
     }
 
     class HarvestStrategy {
         <<interface>>
-        +harvest(resource) bool
+        + harvest(resource: string) bool
+        + ~HarvestStrategy()
     }
 
     class HarvestNavi {
-        +harvest(resource) bool
+        + harvest(resource: string) bool
     }
 
     class HarvestHuman {
-        +harvest(resource) bool
+        + harvest(resource: string) bool
     }
 
     class HarvestNone {
-        +harvest(resource) bool
+        + harvest(resource: string) bool
     }
 
     class Creature {
         <<abstract>>
-        #string id
-        #string type
-        #string zone
-        #int hp
-        #int maxHP
-        #int stamina
-        #int maxStamina
-        #int baseDamage
-        #int countBow
-        #int countGun
-        #int countArmor
-        #Resources inventory
-        #string equippedWeapon
-        #string equippedArmor
-        #string linkPartner
-        #HarvestStrategy* strategy
-        +Creature(...)
-        +clone(id) Creature*
-        +getStrategy() HarvestStrategy*
-        +getID() string
-        +getType() string
-        +getZone() string
-        +getHP() int
-        +getMaxHP() int
-        +getStamina() int
-        +getMaxStamina() int
-        +getBaseDamage() int
-        +getLinkPartner() string
-        +getInventory() Resources&
-        +getCountBow() int
-        +getCountGun() int
-        +getCountArmor() int
-        +setZone(newZone) void
-        +setHP(HP) void
-        +setStamina(s) void
-        +setLinkPartner(lp) void
-        +addItem(item, count) void
-        +getItem(item) int
-        +setEquippedWeapon(item) void
-        +setEquippedArmor(item) void
-        +getEquippedWeapon() string
-        +getEquippedArmor() string
+        # id: string
+        # type: string
+        # zone: string
+        # hp: int
+        # maxHP: int
+        # stamina: int
+        # maxStamina: int
+        # baseDamage: int
+        # countBow: int
+        # countGun: int
+        # countArmor: int
+        # inventory: Resources
+        # equippedWeapon: string
+        # equippedArmor: string
+        # linkPartner: string
+        # strategy: HarvestStrategy*
+        + Creature(id: string, type: string, zone: string, hp: int, maxHP: int, stamina: int, maxStamina: int, baseDamage: int, strategy: HarvestStrategy*)
+        + clone(id: string) Creature*
+        + getStrategy() HarvestStrategy*
+        + ~Creature()
+        + getID() string
+        + getType() string
+        + getZone() string
+        + getHP() int
+        + getMaxHP() int
+        + getStamina() int
+        + getMaxStamina() int
+        + getBaseDamage() int
+        + getLinkPartner() string
+        + getInventory() Resources&
+        + getCountBow() int
+        + getCountGun() int
+        + getCountArmor() int
+        + setZone(newZone: string) void
+        + setHP(HP: int) void
+        + setStamina(s: int) void
+        + setLinkPartner(lp: string) void
+        + addItem(item: string, count: int) void
+        + getItem(item: int) int
+        + setEquippedWeapon(item: string) void
+        + setEquippedArmor(item: string) void
+        + getEquippedWeapon() string
+        + getEquippedArmor() string
     }
 
     class Navi {
-        +Navi(id, zone, hp, stamina)
-        +clone(id) Creature*
-        +getStrategy() HarvestStrategy*
+        + Navi(id: string, zone: string, hp: int, stamina: int)
+        + clone(id: string) Creature*
+        + getStrategy() HarvestStrategy*
     }
 
     class Human {
-        +Human(id, zone, hp, stamina)
-        +clone(id) Creature*
-        +getStrategy() HarvestStrategy*
+        + Human(id: string, zone: string, hp: int, stamina: int)
+        + clone(id: string) Creature*
+        + getStrategy() HarvestStrategy*
     }
 
     class Ikran {
-        +Ikran(id, zone, hp, stamina)
-        +clone(id) Creature*
-        +getStrategy() HarvestStrategy*
+        + Ikran(id: string, zone: string, hp: int, stamina: int)
+        + clone(id: string) Creature*
+        + getStrategy() HarvestStrategy*
     }
 
     class Direhorse {
-        +Direhorse(id, zone, hp, stamina)
-        +clone(id) Creature*
-        +getStrategy() HarvestStrategy*
+        + Direhorse(id: string, zone: string, hp: int, stamina: int)
+        + clone(id: string) Creature*
+        + getStrategy() HarvestStrategy*
     }
 
     class Thanator {
-        +Thanator(id, zone, hp, stamina)
-        +clone(id) Creature*
-        +getStrategy() HarvestStrategy*
+        + Thanator(id: string, zone: string, hp: int, stamina: int)
+        + clone(id: string) Creature*
+        + getStrategy() HarvestStrategy*
     }
 
     class Game {
-        -map~string, Creature*~ creatures
-        -map~string, Zone*~ zones
-        +~Game()
-        +createZone(zoneName, wood, herb, metal) void
-        +createCreature(id, type, zoneName, hp, stamina, wood, herb, metal) void
-        +clone(newId, existingId) void
-        +give(id, item, count) void
-        +move(id, zoneName) void
-        +harvest(id, resource, amount) void
-        +equip(id, item) void
-        +attack(attackerId, defenderId) void
-        +link(naviId, beastId) void
-        +unlink(id) void
-        +status(id) void
-        +inv(id) void
-        +zoneStatus(zoneName) void
+        - creatures: map~string, Creature*~
+        - zones: map~string, Zone*~
+        + ~Game()
+        + createZone(zoneName: string, wood: int, herb: int, metal: int) void
+        + createCreature(id: string, type: string, zoneName: string, hp: int, stamina: int, wood: int, herb: int, metal: int) void
+        + clone(newId: string, existingId: string) void
+        + give(id: string, item: string, count: int) void
+        + move(id: string, zoneName: string) void
+        + harvest(id: string, resource: string, amount: int) void
+        + equip(id: string, item: string) void
+        + attack(attackerId: string, defenderId: string) void
+        + link(naviId: string, beastId: string) void
+        + unlink(id: string) void
+        + status(id: string) void
+        + inv(id: string) void
+        + zoneStatus(zoneName: string) void
     }
 
     %% Наследование интерфейса (Strategy Pattern)
