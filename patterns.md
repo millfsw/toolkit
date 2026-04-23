@@ -82,7 +82,7 @@ classDiagram
         + setStamina(s: int) void
         + setLinkPartner(lp: string) void
         + addItem(item: string, count: int) void
-        + getItem(item: int) int
+        + getItem(item: string) int
         + setEquippedWeapon(item: string) void
         + setEquippedArmor(item: string) void
         + getEquippedWeapon() string
